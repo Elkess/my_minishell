@@ -1,0 +1,302 @@
+/* SHLVL
+4294967100
+0
+
+42949671009
+0
+
+429496980 -> 429496981
+1
+
+429496983 -> 429496984
+1
+
+42949698 -> 42949699
+1
+
+42949699 -> 42949700
+1
+
+429496981 -> 429496982
+1
+
+429496981333333900
+0
+
+-429496981333333900  -> 1669736565
+1
+
+42949698133333390096 -> wrong
+1
+
+42949698133 -> 25174
+1
+
+4294969813399 -> 2517400
+1
+
+42949698133990 ->25173991
+1
+
+429496981339906 ->251739907
+1
+
+429496981333333 -> 251733334
+1
+
+4294969813333339
+0
+
+42949698133990666
+0
+
+4294969813399066699 -> 548231244
+1
+
+4294969813333339009
+1
+
+-4294969813399066699
+0
+
+-429496799
+0
+
+-4294967100
+197
+
+-4294967210
+87
+
+-42949672108
+853
+*/
+
+/* cat < in2 << EOF > output.txt >> log.txt
+// First redirection: input from file
+tree->redirs = malloc(sizeof(t_redir));
+tree->redirs->index = 0;
+tree->redirs->type = REDIR_IN;
+tree->redirs->file = "in2";
+
+// Second: heredoc
+tree->redirs->next = malloc(sizeof(t_redir));
+tree->redirs->next->index = 1;
+tree->redirs->next->type = REDIR_HEREDOC;
+tree->redirs->next->file = "EOF";
+
+// Third: output overwrite
+tree->redirs->next->next = malloc(sizeof(t_redir));
+tree->redirs->next->next->index = 2;
+tree->redirs->next->next->type = REDIR_OUT;
+tree->redirs->next->next->file = "output.txt";
+
+// Fourth: output append
+tree->redirs->next->next->next = malloc(sizeof(t_redir));
+tree->redirs->next->next->next->index = 3;
+tree->redirs->next->next->next->type = REDIR_APPEND;
+tree->redirs->next->next->next->file = "log.txt";
+tree->redirs->next->next->next->next = NULL;
+*/
+
+/* grep 'main' < input.c > result.txt >> summary.log
+tree = malloc(sizeof(t_tree));
+tree->type = NODE_COMMAND;
+tree->cmd = ft_split("grep main", ' ');
+
+// Input redirection
+tree->redirs = malloc(sizeof(t_redir));
+tree->redirs->index = 0;
+tree->redirs->type = REDIR_IN;
+tree->redirs->file = "in2";
+
+// Output redirection
+tree->redirs->next = malloc(sizeof(t_redir));
+tree->redirs->next->index = 1;
+tree->redirs->next->type = REDIR_OUT;
+tree->redirs->next->file = "result.txt";
+
+// Append redirection
+tree->redirs->next->next = malloc(sizeof(t_redir));
+tree->redirs->next->next->index = 2;
+tree->redirs->next->next->type = REDIR_APPEND;
+tree->redirs->next->next->file = "summary.log";
+tree->redirs->next->next->next = NULL;
+
+*/
+
+/*sort < unsorted.txt > sorted.txt >> log.txt
+
+tree = malloc(sizeof(t_tree));
+tree->type = NODE_COMMAND;
+tree->cmd = ft_split("sort", ' ');
+
+// Input file
+tree->redirs = malloc(sizeof(t_redir));
+tree->redirs->index = 0;
+tree->redirs->type = REDIR_IN;
+tree->redirs->file = "in2";
+
+// Output file
+tree->redirs->next = malloc(sizeof(t_redir));
+tree->redirs->next->index = 1;
+tree->redirs->next->type = REDIR_OUT;
+tree->redirs->next->file = "sorted.txt";
+
+// Append output
+tree->redirs->next->next = malloc(sizeof(t_redir));
+tree->redirs->next->next->index = 2;
+tree->redirs->next->next->type = REDIR_APPEND;
+tree->redirs->next->next->file = "log.txt";
+tree->redirs->next->next->next = NULL;
+*/
+/* echo Hello >> output.txt >> backup.txt 
+
+tree = malloc(sizeof(t_tree));
+tree->type = NODE_COMMAND;
+tree->cmd = ft_split("ls -la", ' ');
+
+// First append
+tree->redirs = malloc(sizeof(t_redir));
+tree->redirs->index = 0;
+tree->redirs->type = REDIR_APPEND;
+tree->redirs->file = "output.txt";
+
+// Second append
+tree->redirs->next = malloc(sizeof(t_redir));
+tree->redirs->next->index = 1;
+tree->redirs->next->type = REDIR_APPEND;
+tree->redirs->next->file = "backup.txt";
+tree->redirs->next->next = NULL;
+*/
+		// puts(line);
+		/* SINGLE REDIR 
+		*/
+		// tree->redirs = malloc(sizeof(t_redir));
+		// tree->redirs->type = REDIR_IN;
+		// tree->redirs->file = "Hello";
+		// tree->redirs->next = NULL;
+		// tree->redirs = malloc(sizeof(t_redir));
+
+		// tree->redirs = malloc(sizeof(t_redir));
+		// tree->redirs->index = 0;
+		// tree->redirs->type = REDIR_HEREDOC;
+		// tree->redirs->file = "ll";
+		// tree->redirs->next = NULL;
+
+		// // Second redirection
+		// tree->redirs->next->type = REDIR_HEREDOC;
+		// tree->redirs->next->index = 1;
+		// tree->redirs->next->file = "m";
+		// tree->redirs->next->next = NULL;
+		// // First redirection
+		// tree->redirs->type = REDIR_OUT;
+		// tree->redirs->index = 0;
+		// tree->redirs->file = "out1.txt";
+		// tree->redirs->next = malloc(sizeof(t_redir));
+
+		// // Second redirection
+		// tree->redirs->next->type = REDIR_IN;
+		// tree->redirs->next->index = 1;
+		// tree->redirs->next->file = "in2";
+		// tree->redirs->next->next = malloc(sizeof(t_redir));
+
+		// // Third redirection
+		// tree->redirs->next->next->index = 2;
+		// tree->redirs->next->next->type = REDIR_OUT;
+		// tree->redirs->next->next->file = "out2";
+		// tree->redirs->next->next->next = NULL;
+
+		// Fourth redirection
+		// tree->redirs->next->next->next->type = REDIR_IN;
+		// tree->redirs->next->next->next->file = "in2";
+		// tree->redirs->next->next->next->next = NULL;
+
+
+
+cat in2 | grep "back" > result.txt && echo "done" || echo "fail"
+		t_tree	*pipe_node;
+t_tree	*and_node;
+t_tree	*or_node;
+
+// Step 1: Root is OR
+tree = malloc(sizeof(t_tree));
+tree->type = NODE_OR;
+tree->cmd = NULL;
+tree->redirs = NULL;
+tree->is_ambiguous = 0;
+tree->left = malloc(sizeof(t_tree)); // Left: AND node
+tree->right = malloc(sizeof(t_tree)); // Right: echo "fail"
+tree->fd[0] = -1;
+tree->fd[1] = -1;
+
+// Step 2: Left child of OR is AND node
+and_node = tree->left;
+and_node->type = NODE_AND;
+and_node->cmd = NULL;
+and_node->redirs = NULL;
+and_node->is_ambiguous = 0;
+and_node->left = malloc(sizeof(t_tree));  // Left: pipe
+and_node->right = malloc(sizeof(t_tree)); // Right: echo "done"
+and_node->fd[0] = -1;
+and_node->fd[1] = -1;
+
+// Step 3: Pipe (cat file.txt | grep "back" > result.txt)
+pipe_node = and_node->left;
+pipe_node->type = NODE_PIPE;
+pipe_node->cmd = NULL;
+pipe_node->redirs = NULL;
+pipe_node->is_ambiguous = 0;
+pipe_node->left = malloc(sizeof(t_tree));
+pipe_node->right = malloc(sizeof(t_tree));
+pipe_node->fd[0] = -1;
+pipe_node->fd[1] = -1;
+
+// Left of pipe: cat file.txt
+pipe_node->left->type = NODE_COMMAND;
+pipe_node->left->cmd = ft_split("cat in2", ' ');
+pipe_node->left->redirs = NULL;
+pipe_node->left->left = NULL;
+pipe_node->left->right = NULL;
+pipe_node->left->fd[0] = -1;
+pipe_node->left->fd[1] = -1;
+pipe_node->left->is_ambiguous = 0;
+
+// Right of pipe: grep back > result.txt
+pipe_node->right->type = NODE_COMMAND;
+pipe_node->right->cmd = ft_split("grep back", ' ');
+pipe_node->right->left = NULL;
+pipe_node->right->right = NULL;
+pipe_node->right->fd[0] = -1;
+pipe_node->right->fd[1] = -1;
+pipe_node->right->is_ambiguous = 0;
+
+// Add redirection to grep command
+t_redir *redir = malloc(sizeof(t_redir));
+redir->index = 2;
+redir->type = REDIR_OUT;
+redir->file = strdup("result.txt");
+redir->fd = -1;
+redir->next = NULL;
+
+pipe_node->right->redirs = redir;
+
+// Right child of AND: echo "done"
+and_node->right->type = NODE_COMMAND;
+and_node->right->cmd = ft_split("echo done", ' ');
+and_node->right->left = NULL;
+and_node->right->right = NULL;
+and_node->right->redirs = NULL;
+and_node->right->fd[0] = -1;
+and_node->right->fd[1] = -1;
+and_node->right->is_ambiguous = 0;
+
+// Right child of OR: echo "fail"
+tree->right->type = NODE_COMMAND;
+tree->right->cmd = ft_split("echo fail", ' ');
+tree->right->left = NULL;
+tree->right->right = NULL;
+tree->right->redirs = NULL;
+tree->right->fd[0] = -1;
+tree->right->fd[1] = -1;
+tree->right->is_ambiguous = 0;

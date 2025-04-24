@@ -1,0 +1,17 @@
+Hello
+total 168
+drwxr-xr-x  15 melkess  2024_khouribga    510 Apr 21 14:40 .
+drwxr-xr-x   4 melkess  2024_khouribga    136 Apr 20 12:27 ..
+-rw-r--r--@  1 melkess  2024_khouribga   6148 Apr 21 12:32 .DS_Store
+drwxr-xr-x   3 melkess  2024_khouribga    102 Apr 21 09:01 .vscode
+-rw-r--r--   1 melkess  2024_khouribga    931 Apr 21 10:12 Hello
+-rw-r--r--   1 melkess  2024_khouribga      6 Apr 21 14:39 backup.txt
+-rw-r--r--   1 melkess  2024_khouribga    309 Apr 20 13:31 in1
+-rw-r--r--   1 melkess  2024_khouribga     72 Apr 21 14:27 in2
+drwxr-xr-x   6 melkess  2024_khouribga    204 Apr 20 09:27 include
+drwxr-xr-x   3 melkess  2024_khouribga    102 Apr 20 09:27 library
+-rw-r--r--   1 melkess  2024_khouribga    144 Apr 21 14:30 log.txt
+-rw-r--r--   1 melkess  2024_khouribga   2374 Apr 20 09:27 makefile
+-rwxr-xr-x   1 melkess  2024_khouribga  53080 Apr 21 14:40 minishell
+-rw-r--r--   1 melkess  2024_khouribga      0 Apr 21 14:39 output.txt
+drwxr-xr-x  10 melkess  2024_khouribga    340 Apr 20 09:27 src
