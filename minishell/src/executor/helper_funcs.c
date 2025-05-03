@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:39:01 by melkess           #+#    #+#             */
-/*   Updated: 2025/04/21 16:23:23 by melkess          ###   ########.fr       */
+/*   Updated: 2025/04/30 14:19:30 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	print_rest(char **s, int n)
 	{
 		// TODO: buffering and use write
 		// buffer = ft_strjoin(NULL, s[i]);
-		printf("%s", s[i++]);
+		ft_putstr_fd(s[i++], 1);
 		if (s[i])
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 	}
 	if (!n)
 		printf("\n");

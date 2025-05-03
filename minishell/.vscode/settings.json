@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "executor.h": "c",
-        "chrono": "c",
-        "minishell.h": "c",
-        "readline.h": "c"
-    }
-}

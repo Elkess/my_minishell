@@ -39,5 +39,6 @@ int     is_valid_key(char *key);
 t_env	*edit_env(char *key, char *val, t_env *envh, int should_concat);
 void	print_rest(char **s, int n);
 size_t	ft_envlen(t_env *envh);
+void here_doc(t_redir *redirs);
 
 #endif

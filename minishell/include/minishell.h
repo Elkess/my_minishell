@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:49:41 by sgmih             #+#    #+#             */
-/*   Updated: 2025/04/24 11:45:05 by melkess          ###   ########.fr       */
+/*   Updated: 2025/04/27 10:52:47 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <string.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+#include <sys/stat.h>
 
 typedef enum e_token_type
 {
@@ -92,6 +94,7 @@ int		 ft_isalpha(int a);
 int		 ft_isdigit(int n);
 int		 ft_isalnum(int c);
 char		*ft_strchr(const char *s, int c);
+char	*ft_itoa(int n);
 
 
 #endif

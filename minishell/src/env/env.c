@@ -82,28 +82,25 @@ int	handle_defaults(t_env **envh)
 
 char	*handle_shlvl(char *val)
 {
-	long long raw_input = atoll(val);
-    int parsed;
+	long long		raw_input;
+	unsigned int	wrapped;
+	int				parsed;
 
-    // Simulate signed int overflow behavior
-    if (raw_input < INT_MIN || raw_input > INT_MAX) {
-        unsigned int wrapped = (unsigned int)raw_input;
-        printf("Warning: Value out of signed int range.\n");
-        parsed = wrapped +1;
-    } else {
-        parsed = (int)raw_input +1;
-    }
-
-    if (parsed < 0) {
-        printf("SHLVL was negative. Resetting to 0.\n");
-        parsed = 0;
-    } else if (parsed > 1000) {
-        printf("SHLVL too high (%d). Resetting to 1.\n", parsed);
-        parsed = 1;
-    }
-
-    printf("Final interpreted SHLVL: %d\n", parsed);
-	return (val);
+	raw_input = atoll(val);
+	if (raw_input == 999)
+		return (ft_strdup(""));
+	if (raw_input < INT_MIN || raw_input > INT_MAX)
+	{
+		wrapped = (unsigned int)raw_input;
+		parsed = wrapped +1;
+	}
+	else
+		parsed = (int)raw_input +1;
+	if (parsed < 0)
+		parsed = 0;
+	else if (parsed > 1000)
+		parsed = 1;
+	return (ft_strdup(ft_itoa(parsed)));
 }
 
 t_env	*fill_env(char **envp)
@@ -126,13 +123,8 @@ t_env	*fill_env(char **envp)
 			envh = append_node(envh, key, val);
 			i++;
 		}
-		if (handle_defaults(&envh))
-			return (NULL);
 	}
-	else
-	{
-		if (handle_defaults(&envh))
-			return (NULL);
-	}
+	if (handle_defaults(&envh))
+		return (NULL);
 	return (envh);
 }
