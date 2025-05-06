@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:49:41 by sgmih             #+#    #+#             */
-/*   Updated: 2025/04/27 10:52:47 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/03 19:57:47 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_redir
 	t_redir_type	type;
 	char			*file;
 	int				fd;
+	int				flag;
 	struct s_redir  *next;
 }	t_redir;
 
@@ -96,5 +97,8 @@ int		 ft_isalnum(int c);
 char		*ft_strchr(const char *s, int c);
 char	*ft_itoa(int n);
 
+
+//
+void here_docs(t_redir *redirs);
 
 #endif

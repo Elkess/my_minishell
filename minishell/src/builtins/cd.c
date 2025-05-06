@@ -6,12 +6,12 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:01:34 by melkess           #+#    #+#             */
-/*   Updated: 2025/05/03 10:44:38 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/04 11:49:27 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
-
+//TODO: errror 
 int	cd(t_env **envh, t_tree *cmd)
 {
 	DIR		*dir;
@@ -32,8 +32,8 @@ int	cd(t_env **envh, t_tree *cmd)
 	_dir = getcwd(NULL, 0);
 	if (!_dir)
 	{
-		printf("bash: cd: getcwd Failed\n");
-		return (1);
+		printf("cd: error retrieving current directory: getcwd: cannot access parent directories:No such file or directory\n");
+		// return (1);
 	}
 	dir = opendir(cmd->cmd[0]);
 	if (!dir)
@@ -51,8 +51,7 @@ int	cd(t_env **envh, t_tree *cmd)
 	_dir = getcwd(NULL, 0);
 	if (!_dir)
 	{
-		printf("bash: cd: getcwd Failed\n");
-		return (1);
+		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
 	}
 	*envh = edit_env("PWD", _dir, *envh, 0);
 	// free(_dir);

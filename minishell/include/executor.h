@@ -23,7 +23,7 @@ int	executor(t_tree *tree,t_env	*envh);
 
 // builts in
 int		echo(t_tree *cmd1);
-int		pwd(int fd);
+int		pwd();
 int		env(t_env *envh);
 int		cd(t_env **envh, t_tree *cmd);
 int		ft_export(t_env **envh, t_tree *tree);
@@ -39,6 +39,6 @@ int     is_valid_key(char *key);
 t_env	*edit_env(char *key, char *val, t_env *envh, int should_concat);
 void	print_rest(char **s, int n);
 size_t	ft_envlen(t_env *envh);
-void here_doc(t_redir *redirs);
+char	**struct_to_darr(t_env *envh);
 
 #endif

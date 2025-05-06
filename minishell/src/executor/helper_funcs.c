@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:39:01 by melkess           #+#    #+#             */
-/*   Updated: 2025/04/30 14:19:30 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/05 09:42:29 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ int	is_valid_key(char *key)
 void	print_rest(char **s, int n)
 {
 	size_t	i;
-	char	**buffer;
+	char	*buffer;
 
 	buffer = NULL;
 	i = 0;
 	while (s[i])
 	{
-		// TODO: buffering and use write
-		// buffer = ft_strjoin(NULL, s[i]);
-		ft_putstr_fd(s[i++], 1);
+		buffer= ft_strjoin(buffer, s[i++]);
 		if (s[i])
-			ft_putstr_fd(" ", 1);
+			buffer= ft_strjoin(buffer, " "); //TODO: handle tabs
 	}
 	if (!n)
-		printf("\n");
+		buffer= ft_strjoin(buffer, "\n");
+	write(1, buffer, ft_strlen(buffer));
 }
+

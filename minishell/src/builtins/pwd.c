@@ -6,13 +6,13 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:23:47 by melkess           #+#    #+#             */
-/*   Updated: 2025/04/22 09:29:13 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/05 10:48:14 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
-
-int	pwd(int fd)
+// TODO: she is going to read from the hiden var  
+int	pwd()
 {
 	char	*pwd;
 
@@ -22,7 +22,6 @@ int	pwd(int fd)
 		perror("PWD Failed !");
 		return (1);
 	}
-	(ft_putstr_fd(pwd, fd));
-	(ft_putstr_fd("\n", fd));
-	return (1);
+	printf("%s\n", pwd);
+	return (0);
 }

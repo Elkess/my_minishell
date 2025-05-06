@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 18:51:01 by melkess           #+#    #+#             */
-/*   Updated: 2025/05/03 10:54:34 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/05 14:30:50 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	is_dir(char **p, char *path)
 		}
 		else
 		{
+			puts(path);
 			printf("minishell2: %s: is a directory\n", path);
 			exit (126);
 		}
@@ -88,7 +89,7 @@ void	execute_one(t_tree *cmd, t_env *envh)
 		(perror("Fork Failed:"), exit(1));
 	if (fd == 0)
 	{
-		if (!access(cmd->cmd[0], X_OK))
+		if ((!access(cmd->cmd[0], X_OK) && ft_strchr(cmd->cmd[0], '/')) || !path || !*path)
 		{
 			is_dir(path, cmd->cmd[0]);
 			if (execve(cmd->cmd[0], cmd->cmd, env) == -1)
@@ -155,7 +156,8 @@ int	handle_lastredir(t_redir *redirs)
 	lastin = find_lastredir(redirs, REDIR_IN);
 	lastout = find_lastredir(redirs, REDIR_OUT);
 
-	if (lastin && lastin->type != REDIR_HEREDOC && (!lastout || (lastout && lastin->index < lastout->index)))
+	if (lastin && lastin->type != REDIR_HEREDOC && (!lastout ||
+		(lastout && lastin->index < lastout->index)))
 	{
 		lastin->fd = open(lastin->file, O_RDONLY);
 		if (lastin->fd == -1)
@@ -201,7 +203,7 @@ int	ft_redir(t_tree *tree)
 				return (1);
 			}
 		// }
-		if (red != find_lastredir(tree->redirs, REDIR_OUT) &&
+		if (red != find_lastredir(tree->redirs, REDIR_OUT) && // opened fd
 			red != find_lastredir(tree->redirs, REDIR_IN))
 			close(red->fd);
 		red = red->next;
@@ -231,7 +233,51 @@ char	*generate_file(t_redir *red)
 	return (str);
 }
 
-void	here_doc(t_redir *red)
+// void	here_doc()
+// {
+// 	char	*line;
+// 	char	*file;
+
+// 	file = generate_file(red);
+// 	while (1)
+// 	{
+// 		line = readline("> ");
+// 		if (!line)
+// 			exit(1);
+// 		if (!ft_strcmp(line, red->file))
+// 			break ;
+// 		// if (flag == 1)
+// 		// {
+// 		// 	line = expand(line)
+// 		// }
+// 		line = ft_strjoin(line, "\n");
+// 		write(red->fd, line, ft_strlen(line)); //TODO :write all at once
+// 	}
+// 	close(red->fd);
+// 	red->fd = open(file, O_CREAT | O_RDWR | O_APPEND);
+// 	if (red->fd == -1)
+// 		(perror("Open failed in << :"), exit (1));
+// 	unlink(file);
+// }
+
+// char	*heredoc_expand(char *line)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	// while (1)
+// 	// {
+// 	// 	if (!ft_strchr(line, '$'))
+// 	// 		break ;
+		
+// 	// }
+// 	while (line[i])
+// 	{
+// 	}
+	
+// }
+
+void	here_docs(t_redir *red)
 {
 	char	*line;
 	char	*file;
@@ -243,17 +289,23 @@ void	here_doc(t_redir *red)
 		{
 			file = generate_file(red);
 			while (1)
-			{//TODO: 1 handle heredocs with unlink and fd
+			{
 				line = readline("> ");
 				if (!line)
 					exit(1);
 				if (!ft_strcmp(line, red->file))
 					break ;
+				// if (red->flag == 1)
+				// {
+				// 	line = heredoc_expand(line);
+				// }
 				line = ft_strjoin(line, "\n");
 				write(red->fd, line, ft_strlen(line)); //TODO :write all at once
 			}
 			close(red->fd);
+			///
 			red->fd = open(file, O_CREAT | O_RDWR | O_APPEND);
+			// read it and expand each line
 			if (red->fd == -1)
 				(perror("Open failed in << :"), exit (1));
 			unlink(file);
@@ -283,7 +335,7 @@ int	execute_cmd(t_tree *tree, t_env *envh, int status)
 	cmd = tree->cmd[0];
 	if (!cmd)
 		return (0);
-	else if (!ft_strcmp(cmd, "echo"))
+	else if (!ft_strcmp(cmd, "echo") )
 		status = echo(tree);
 	else if (!ft_strcmp(cmd, "cd"))
 		status = cd(&envh, tree);
@@ -294,7 +346,7 @@ int	execute_cmd(t_tree *tree, t_env *envh, int status)
 	else if (!ft_strcmp(cmd, "env"))
 		status = env(envh);
 	else if (!ft_strcmp(cmd, "pwd"))
-		status = pwd(1);
+		status = pwd();
 	else if (!ft_strcmp(cmd, "exit"))
 		ft_exit(tree, 0);
 	else
@@ -320,7 +372,7 @@ int	executor(t_tree *tree, t_env *envh)
 		// lasthd = find_lasthd(tree->redirs);
 		// TODO: 2 handle herdoc properly this is wrong
 		// if (lasthd)
-		// 	here_doc(tree->redirs);
+		// 	here_docs(tree->redirs);
 		redir_status = ft_redir(tree);
 	}
 	if (!redir_status)

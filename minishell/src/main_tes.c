@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:21:18 by sgmih             #+#    #+#             */
-/*   Updated: 2025/05/03 10:55:23 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/05 14:19:14 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ void	handle_herdocs(t_tree *tree)
 {
 	if (!tree)
 		return ;
-	here_doc(tree->redirs);
+	here_docs(tree->redirs);
 	handle_herdocs(tree->left);
 	handle_herdocs(tree->right);
 }
@@ -290,13 +290,12 @@ int	main(int ac, char **av, char **env)
 		// tree->cmd = ft_split(line, ' ');
 		tree = temporary_parse(line);
 		// print_tree(tree, 0);
-
 		handle_herdocs(tree);
 		// tree->redirs = NULL; // Deactivate the reds
+        // puts(line);
 		if (line && *line)
 			printf("exit status: %d\n", execute_tree(tree, envh));
 	}
 	// TODO: Freeeeeeeeeeeeee;
-
 	return (0);
 }
