@@ -23,9 +23,9 @@ int	executor(t_tree *tree,t_env	*envh);
 
 // builts in
 int		echo(t_tree *cmd1);
-int		pwd();
+int		pwd(char **cd_path, int print);
 int		env(t_env *envh);
-int		cd(t_env **envh, t_tree *cmd);
+int		cd(t_env **envh, t_tree *cmd, char	**fake_pwd);
 int		ft_export(t_env **envh, t_tree *tree);
 int		unset(t_env **envh, char **args);
 void    ft_exit(t_tree *cmd, int status);

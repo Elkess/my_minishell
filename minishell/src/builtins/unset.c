@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:12:29 by melkess           #+#    #+#             */
-/*   Updated: 2025/04/22 09:28:37 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 08:55:06 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	unset(t_env **envh, char **args)
 		}
 		else
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n",
-				args[i]);
+			ft_putstr_fd(ft_strjoin("minishell: unset: ", ft_strjoin(args[i], "': not a valid identifier\n")), 2);
 			n = 1;
 		}
 		i++;

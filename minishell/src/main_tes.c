@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:21:18 by sgmih             #+#    #+#             */
-/*   Updated: 2025/05/05 14:19:14 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 08:35:34 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../include/executor.h"
 #include <errno.h>
 //cc -lreadline src/main_tes.c src/builtins/*.c src/executor/*.c src/env/*.c  library/libft/*.c -o minishell && env -i ./minishell
+
 static char	*ft_get_prompt(int exit_status)
 {
 	char	*prompt;
@@ -43,8 +44,6 @@ static t_tree *create_command_node(char **cmd)
     node->type = NODE_COMMAND;
     node->cmd = cmd;
     node->redirs = NULL;
-    node->fd[0] = -1;
-    node->fd[1] = -1;
     node->is_ambiguous = 0;
     node->left = NULL;
     node->right = NULL;
@@ -160,8 +159,6 @@ static t_tree *parse_tokens(char **tokens, size_t start, size_t end)
                 node->type = NODE_AND;
             else
                 node->type = NODE_OR;
-            node->fd[0] = -1;
-            node->fd[1] = -1;
             node->is_ambiguous = 0;
             node->cmd = NULL;
             node->redirs = NULL;

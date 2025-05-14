@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:39:01 by melkess           #+#    #+#             */
-/*   Updated: 2025/05/05 09:42:29 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:27:44 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env	*edit_env(char *key, char *val, t_env *envh, int should_concat)
 			{
 				if (val)
 				{
-					free(tmp->value);	
+					free(tmp->value);
 					tmp->value = val; //leaks
 				}
 			}

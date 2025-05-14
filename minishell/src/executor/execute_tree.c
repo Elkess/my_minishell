@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 08:39:55 by melkess           #+#    #+#             */
-/*   Updated: 2025/05/02 08:34:11 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 12:20:14 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,30 @@
 int	execute_pipes(t_tree *tree, t_env *envh)
 {
 	int		pipefd[2];
-	pid_t	left_pid;
-	pid_t	right_pid;
+	pid_t	pids[2];
 	int		status;
 
 	if (tree->type != NODE_PIPE)
 		return (-1);
 	if (pipe(pipefd) == -1)
 		return (perror("Pipe failed"), -1);
-	left_pid = fork();
-	if (left_pid == -1)
+	pids[0] = fork();
+	if (pids[0] == -1)
 		return (perror("Fork failed"), -1);
-	if (left_pid == 0)
+	if (pids[0] == 0)
 	{
 		(close(pipefd[0]), dup2(pipefd[1], 1));
 		(close(pipefd[1]), exit(execute_tree(tree->left, envh)));
 	}
-	right_pid = fork();
-	if (right_pid == -1){perror("Fork failed");return (-1);}
-	if (right_pid == 0)
+	pids[1] = fork();
+	if (pids[1] == -1){perror("Fork failed");return (-1);}
+	if (pids[1] == 0)
 	{
 		(close(pipefd[1]), dup2(pipefd[0], 0));
 		(close(pipefd[0]), exit(execute_tree(tree->right, envh)));
 	}
 	(close(pipefd[0]), close(pipefd[1]));
-	(waitpid(left_pid, NULL, 0), waitpid(right_pid, &status, 0));
+	(waitpid(pids[0], NULL, 0), waitpid(pids[1], &status, 0));
 	return (WEXITSTATUS(status));
 }
 

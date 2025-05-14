@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:29:09 by melkess           #+#    #+#             */
-/*   Updated: 2025/04/22 09:32:59 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 08:53:34 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ long long	ft_atol(const char *str, int sign)
 		i++;
 	}
 	if (i != ft_strlen(str))
-		(printf("exit\nminishell: exit: %s: numeric Atol argument required\n", str)
+		(ft_putstr_fd(ft_strjoin("exit\nminishell: exit: ", ft_strjoin(str, ": numeric Atol argument required\n")), 2)
 			, exit(255));
 	return (result * sign);
 }

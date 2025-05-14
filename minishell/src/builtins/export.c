@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:34:29 by melkess           #+#    #+#             */
-/*   Updated: 2025/04/22 09:20:58 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 08:54:03 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,12 @@ void	print_export(t_env *envh)
 {
 	size_t	i;
 	char	**str;
+	char	*buffer;
 	t_env	*holder;
 
 	i = 0;
-	holder = envh;
+	buffer = NULL;
+	holder = envh; //TODO: NO need for buffering 
 	str = sorting_str(filling_str(envh)); //leaks
 	while (str[i])
 	{
@@ -86,9 +88,16 @@ void	print_export(t_env *envh)
 				&& str[i][ft_strlen(envh->key)] == '=')
 			{
 				if (!envh->value)
+				{
+					// buffer = ft_strjoin(buffer, ft_strjoin("declare -x ", ft_strjoin(envh->key, "\n")));
 					printf("declare -x %s\n", envh->key);
+				}
 				else
+				{
+					// buffer = ft_strjoin(buffer, ft_strjoin("declare -x ",
+					// 	ft_strjoin(envh->key, ft_strjoin("=\"", ft_strjoin(envh->value, "\"\n")))));
 					printf("declare -x %s=\"%s\"\n", envh->key, envh->value);
+				}
 				break ;
 			}
 			envh = envh->next;
@@ -96,6 +105,7 @@ void	print_export(t_env *envh)
 		envh = holder;
 		i++;
 	}
+	// ft_putstr_fd(buffer, 1);
 }
 
 int	manipulate_export(t_env **envh, t_tree *cmd1, char *key, char *val)
@@ -114,17 +124,15 @@ int	manipulate_export(t_env **envh, t_tree *cmd1, char *key, char *val)
 				*envh = edit_env(key, val, *envh, 1);
 			else
 			{
-			printf("minishell: export: `%s': not a valid identifier\n",
-				cmd1->cmd[i]);
-							return (1);
+				ft_putstr_fd(ft_strjoin("minishell10: export: `", ft_strjoin(cmd1->cmd[i], "': not a valid identifier\n")), 2);
+				return (1);
 			}
 		}
 		else if (is_valid_key(key))
 			*envh = edit_env(key, val, *envh, 0);
 		else
 		{
-			printf("minishell: export: `%s': not a valid identifier\n",
-				cmd1->cmd[i]);
+			ft_putstr_fd(ft_strjoin("minishell11: export: `", ft_strjoin(cmd1->cmd[i], "': not a valid identifier\n")), 2);
 			return (1);
 		}
 		i++;

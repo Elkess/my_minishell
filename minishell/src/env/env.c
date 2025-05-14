@@ -86,7 +86,7 @@ char	*handle_shlvl(char *val)
 	unsigned int	wrapped;
 	int				parsed;
 
-	raw_input = atoll(val);
+	raw_input = atoll(val); //TODO : make ur atoll
 	if (raw_input == 999)
 		return (ft_strdup(""));
 	if (raw_input < INT_MIN || raw_input > INT_MAX)
