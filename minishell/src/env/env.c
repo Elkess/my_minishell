@@ -81,7 +81,7 @@ int	handle_defaults(t_env **envh)
 }
 
 char	*handle_shlvl(char *val)
-{
+{// TODO: Test it more; you are NOT fully understand how it works 
 	long long		raw_input;
 	unsigned int	wrapped;
 	int				parsed;

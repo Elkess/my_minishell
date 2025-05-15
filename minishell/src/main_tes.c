@@ -6,7 +6,7 @@
 /*   By: melkess <melkess@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:21:18 by sgmih             #+#    #+#             */
-/*   Updated: 2025/05/14 08:35:34 by melkess          ###   ########.fr       */
+/*   Updated: 2025/05/14 16:08:57 by melkess          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ void print_tree(t_tree *tree, int level)
         print_tree(tree->right, level + 1);
     }
 }
-
 
 void	handle_herdocs(t_tree *tree)
 {
